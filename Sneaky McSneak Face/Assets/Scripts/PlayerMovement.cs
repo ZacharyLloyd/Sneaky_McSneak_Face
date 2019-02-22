@@ -123,11 +123,11 @@ public class PlayerMovement : MonoBehaviour
                 speed -= rateOfSpeed * Mathf.Sign(-speed);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy" || collision.tag == "Asteroid")
         {
-            if (gameManager.instance.playerLives > 0)
+           if (gameManager.instance.playerLives > 0)
             {
                 gameManager.instance.playerLives--;
                 gameObject.transform.position = originPosition;
@@ -141,6 +141,6 @@ public class PlayerMovement : MonoBehaviour
             }
             gameObject.transform.position = originPosition;
         }
-    }
+    } */
 }
 
