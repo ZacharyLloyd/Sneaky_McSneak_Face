@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
             if (Mathf.Abs(speed) * -1 > Mathf.Abs(maxSpeed) * -1)
                 speed += rateOfSpeed;
 
-            rigidBody.AddForce(speed * (transform.localRotation * new Vector2(0f, rotationSpeed)));
+            rigidBody.AddForce(speed * (transform.localRotation * new Vector2(rotationSpeed, 0f)));
         }
         else
         {
@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
             if (Mathf.Abs(speed) < Mathf.Abs(maxSpeed))
                 speed += rateOfSpeed;
 
-            rigidBody.AddForce(speed * (transform.localRotation * new Vector2(0f, -rotationSpeed)));
+            rigidBody.AddForce(speed * (transform.localRotation * new Vector2(-rotationSpeed, 0f)));
         }
         else
         {

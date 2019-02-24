@@ -15478,14 +15478,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 1
+  m_AngularDrag: 2
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &532347932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15500,10 +15500,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rotationSpeed: 0
-  maxSpeed: 5
-  maxRotationSpeed: 100
-  rateOfSpeed: 5
-  rateOfRotation: 100
+  maxSpeed: 1
+  maxRotationSpeed: 5
+  rateOfSpeed: 1
+  rateOfRotation: 3
   enableReversedControl: 0
 --- !u!212 &532347933
 SpriteRenderer:
