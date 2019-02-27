@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private float clockwise; //Reads the values 1 and -1, 1 for clockwise and -1 for counter clockwise
     private float rotationValue; //Rotation controls, returns the value of the controller/keyboard (-1, 0, 1)
 
-    private bool throttleDown; //Detecting throttle
-    private bool reverseThrotleDown; //Detecting reverse throttle
+    private bool movement; //Detecting movement
+    private bool reverseMovement; //Detecting reverse movement
 
     private Rigidbody2D rigidBody; //Giving a name that will reference the rigid body on the sprite
     public static Vector3 originPosition;
@@ -78,14 +78,14 @@ public class PlayerMovement : MonoBehaviour
         switch (enableReversedControl)
         {
             case false:
-                throttleDown = Input.GetKey(KeyCode.W);
+                movement = Input.GetKey(KeyCode.W);
                 break;
             case true:
-                throttleDown = Input.GetKey(KeyCode.S);
+                movement = Input.GetKey(KeyCode.S);
                 break;
         }
         //Going forwards
-        if (throttleDown == true)
+        if (movement == true)
         {
             if (Mathf.Abs(speed) * -1 > Mathf.Abs(maxSpeed) * -1)
                 speed += rateOfSpeed;
@@ -104,13 +104,13 @@ public class PlayerMovement : MonoBehaviour
         switch (enableReversedControl)
         {
             case false:
-                reverseThrotleDown = Input.GetKey(KeyCode.S);
+                reverseMovement = Input.GetKey(KeyCode.S);
                 break;
             case true:
-                reverseThrotleDown = Input.GetKey(KeyCode.W);
+                reverseMovement = Input.GetKey(KeyCode.W);
                 break;
         }
-        if (reverseThrotleDown == true)
+        if (reverseMovement == true)
         {
             if (Mathf.Abs(speed) < Mathf.Abs(maxSpeed))
                 speed += rateOfSpeed;
