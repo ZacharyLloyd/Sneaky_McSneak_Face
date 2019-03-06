@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public float currentHealth;
     public float maxHealth;
     public float damage;
-    public float ammo;
+    public float ammoValue;
+    public static float ammo;
     public float maxAmmo;
     public TextMeshProUGUI ammoUI;
 
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthUI.fillAmount = currentHealth / maxHealth;
+        ammo = ammoValue;
         ammo = maxAmmo;
         ammoUI.text = "Ammo: " + ammo.ToString() + "/" + maxAmmo.ToString();
     }
@@ -26,9 +28,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKey(KeyCode.Return))
             {
                 healthUI.fillAmount -= damage / maxHealth;
             }
+        if (ammo != 0)
+            if (Input.GetKeyDown(KeyCode.Space)) UseAmmo();
+    }
+    //Using ammo UI
+    public void UseAmmo()
+    {
+        --ammo;
+        ammoUI.text = "Ammo: " + ammo.ToString() + "/" + maxAmmo.ToString();
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+        GameManager instance;
+
         public Transform pointOfFire; //Assigning the gameObject that is the child to the Player gameObject
         public GameObject bulletPrefab; //Assing a Prefab to the slot in order to spawn it when shooting
 
@@ -19,14 +21,17 @@ public class Shoot : MonoBehaviour
             //When player shoots
             if (Input.GetKeyDown(KeyCode.Space) || isKeyReleased == true)
             {
-                coroutine = Recoil();
-                switch (automaticMode)
+            coroutine = Recoil();
+            switch (automaticMode)
                 {
                     case false:
+                    if (GameManager.ammo != 0)
+                    {
                         isKeyReleased = false;
                         //Bullet will spawn with a set direction based on player's direction
                         Instantiate(bulletPrefab, pointOfFire.position, pointOfFire.rotation);
                         FindObjectOfType<AudioManager>().Play("Shoot");
+                    }
                         break;
                     case true:
                         isKeyReleased = false;
