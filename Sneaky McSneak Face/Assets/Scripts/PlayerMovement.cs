@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigidBody; //Giving a name that will reference the rigid body on the sprite
     public static Vector3 originPosition;
 
+    public Transform tf; //Declaring the transform
+
     //Awake is called before the first frame
     void Awake()
     {

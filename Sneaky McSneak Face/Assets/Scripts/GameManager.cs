@@ -15,6 +15,26 @@ public class GameManager : MonoBehaviour
     public float maxAmmo;
     public TextMeshProUGUI ammoUI;
 
+    //Singleton
+    public static GameManager instance;
+
+    public PlayerMovement player;
+
+    //Awake runs before all Starts
+    private void Awake()
+    {
+        //Setup the Singleton
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
