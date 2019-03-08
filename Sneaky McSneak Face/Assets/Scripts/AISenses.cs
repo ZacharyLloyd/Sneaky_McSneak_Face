@@ -68,7 +68,7 @@ public class AISenses : MonoBehaviour
         
         RaycastHit2D hitInfo = Physics2D.Raycast(tf.position, vectorToTarget, sightDistance);
 
-        Debug.Log("Nanja? " + hitInfo.collider);
+        
         Debug.DrawLine(tf.position, tf.position + vectorToTarget * sightDistance, Color.red);
 
         //If the raycase hits nothing, enemy cannot see player
@@ -76,9 +76,11 @@ public class AISenses : MonoBehaviour
         {
           return false;
         }
+        Debug.Log("Raycast? " + hitInfo.collider);
         //If the raycast hits the player first, enemy can see them
-       if (hitInfo.collider == targetCollider)
+        if (hitInfo.collider == targetCollider)
        {
+           
             Debug.DrawLine(tf.position, tf.position + vectorToTarget * sightDistance, Color.red);
             return true;
         }
