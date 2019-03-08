@@ -41,8 +41,6 @@ public class AISenses : MonoBehaviour
     {
         Vector3 perpendicularDirection = new Vector3(-tf.right.y, tf.right.x);
         float oppositeSideLength = Mathf.Tan(fieldOfView * 0.5f * DegreesToRadians) * DebugAngleDistance;
-        Debug.DrawLine(tf.position, tf.position + DebugAngleDistance * tf.right + perpendicularDirection * oppositeSideLength, Color.green);
-        Debug.DrawLine(tf.position, tf.position + DebugAngleDistance * tf.right - perpendicularDirection * oppositeSideLength, Color.green);
     }
     public bool CanSee(GameObject target)
     {
@@ -68,9 +66,6 @@ public class AISenses : MonoBehaviour
         //Use raycast to make sure nothing is blocking the view
         
         RaycastHit2D hitInfo = Physics2D.Raycast(tf.position, tf.position + vectorToTarget, sightDistance);
-        Debug.Log("SUKCKCKKCKCKC " + hitInfo.collider);
-
-        Debug.DrawLine(tf.position, tf.position + vectorToTarget * sightDistance, Color.red);
 
         //If the raycase hits nothing, enemy cannot see player
         if (hitInfo.collider == null)
@@ -82,10 +77,8 @@ public class AISenses : MonoBehaviour
         if (hitInfo.collider.name == "enemyShooter")
         {
            
-            Debug.DrawLine(tf.position, tf.position + vectorToTarget * sightDistance, Color.red);
             return true;
         }
-        Debug.Log("Raycast? " + hitInfo.collider);
         //Otherwise, if enemy raycast hitss somehting else we failed to see the player
         return false;
     }
