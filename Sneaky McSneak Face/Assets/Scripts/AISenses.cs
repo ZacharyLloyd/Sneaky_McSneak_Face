@@ -19,6 +19,7 @@ public class AISenses : MonoBehaviour
         tf = GetComponent<Transform>();
     }
 
+
     public bool CanHear(GameObject target)
     {
         //If the target does not have a noisemaker we cannot hear them
@@ -29,7 +30,7 @@ public class AISenses : MonoBehaviour
         }
         //If they do have a noisemaker, check distance -- if it is <= (PlayerVolume * hearingScale), then we can hear them
         Transform targetTf = target.GetComponent<Transform>();
-        if (Vector3.Distance(targetTf. position, tf.position) <= targetNoiseMaker.PlayerVolume * hearingScale)
+        if (Vector3.Distance(targetTf.position, tf.position) <= targetNoiseMaker.PlayerVolume * hearingScale)
         {
             return true;
         }
@@ -64,16 +65,20 @@ public class AISenses : MonoBehaviour
         }
         // If they are in our field-of-view
         //Use raycast to make sure nothing is blocking the view
+        
         RaycastHit2D hitInfo = Physics2D.Raycast(tf.position, vectorToTarget, sightDistance);
+
+        Debug.Log("Nanja? " + hitInfo.collider);
+        Debug.DrawLine(tf.position, tf.position + vectorToTarget * sightDistance, Color.red);
 
         //If the raycase hits nothing, enemy cannot see player
         if (hitInfo.collider == null)
         {
-            return false;
+          return false;
         }
         //If the raycast hits the player first, enemy can see them
-        if (hitInfo.collider == targetCollider)
-        {
+       if (hitInfo.collider == targetCollider)
+       {
             Debug.DrawLine(tf.position, tf.position + vectorToTarget * sightDistance, Color.red);
             return true;
         }

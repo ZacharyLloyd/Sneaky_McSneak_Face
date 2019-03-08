@@ -30,7 +30,7 @@ public class Shoot : MonoBehaviour
                         isKeyReleased = false;
                         //Bullet will spawn with a set direction based on player's direction
                         Instantiate(bulletPrefab, pointOfFire.position, pointOfFire.rotation);
-                        FindObjectOfType<AudioManager>().Play("Shoot");
+                        //FindObjectOfType<AudioManager>().Play("Shoot"); NOT NEEDED****
                     }
                         break;
                     case true:

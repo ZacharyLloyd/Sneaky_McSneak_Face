@@ -25,6 +25,18 @@ public class Guard : MonoBehaviour
     public float turnSpeed = 1;
     Transform tf;
 
+    // Use this for initialization
+    void Start()
+    {
+        // Store my senses component
+        senses = GetComponent<AISenses>();
+
+        tf = GetComponent<Transform>();
+
+        // Save home point
+        homePoint = tf.position;
+    }
+
     //Update is called once per frame
     void Update()
     {

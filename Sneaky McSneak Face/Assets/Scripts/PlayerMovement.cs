@@ -24,46 +24,52 @@ public class PlayerMovement : MonoBehaviour
     public static Vector3 originPosition;
 
     public Transform tf; //Declaring the transform
+    public Noisemaker noisemaker; //Creating the noisemaker for the player
+    public float MoveVolume; //Moving volume
+    public float TurnVolume; // Turning volume
 
     //Awake is called before the first frame
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>(); //Grabbing the component of the local rigid body
     }
+ 
+    // Use this for initialization
+    void Start()
+    {
+        tf = gameObject.transform;
+
+        // Load noisemaker
+        noisemaker = GetComponent<Noisemaker>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        rotationValue = Input.GetAxisRaw("Horizontal"); //Left or right arrow keys or A and D keys
-
-        switch (enableReversedControl)
-        {
-            case false:
-                Rotate(-rotationValue); //rotationValue is used as a parameter for the rotate function
-                break;
-            case true:
-                Rotate(rotationValue);
-                break;
-        }
+        tf = gameObject.transform;
+        
+         
     }
 
     private void FixedUpdate()
     {
-        switch (enableReversedControl)
-        {
-            case false:
-                if (Input.GetKey(KeyCode.W)) Forward();
+        rotationValue = Input.GetAxisRaw("Horizontal"); //Left or right arrow keys or A and D keys
+
+        Rotate(-rotationValue); //rotationValue is used as a parameter for the rotate function
+
+        if (Input.GetKey(KeyCode.W)) Forward();
                 else if (Input.GetKey(KeyCode.S)) Backwards();
-                break;
-            case true:
-                if (Input.GetKey(KeyCode.W)) Backwards();
-                else if (Input.GetKey(KeyCode.S)) Forward();
-                break;
-        }
+         
     }
 
     float Rotate(float direction)
     {
+        // Turning makes noise! Change volume to whichever is more -- current volume or the turn volume
+        if (noisemaker != null)
+        {
+            noisemaker.PlayerVolume = Mathf.Max(noisemaker.PlayerVolume, TurnVolume);
+        }
+
         if (Mathf.Abs(rotationSpeed) < Mathf.Abs(maxRotationSpeed))
         {
             rotationSpeed += rateOfRotation; //The rotation speed is not assigned to a number
@@ -77,15 +83,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Forward()
     {
-        switch (enableReversedControl)
+        
+        movement = Input.GetKey(KeyCode.W);
+
+        // Turning makes noise! Change volume to whichever is more -- current volume or the turn volume
+        if (noisemaker != null)
         {
-            case false:
-                movement = Input.GetKey(KeyCode.W);
-                break;
-            case true:
-                movement = Input.GetKey(KeyCode.S);
-                break;
+            noisemaker.PlayerVolume = Mathf.Max(noisemaker.PlayerVolume, MoveVolume);
         }
+
         //Going forwards
         if (movement == true)
         {
@@ -103,15 +109,15 @@ public class PlayerMovement : MonoBehaviour
     //Moving backwards
     void Backwards()
     {
-        switch (enableReversedControl)
+    
+        reverseMovement = Input.GetKey(KeyCode.S);
+
+        // Turning makes noise! Change volume to whichever is more -- current volume or the turn volume
+        if (noisemaker != null)
         {
-            case false:
-                reverseMovement = Input.GetKey(KeyCode.S);
-                break;
-            case true:
-                reverseMovement = Input.GetKey(KeyCode.W);
-                break;
+            noisemaker.PlayerVolume = Mathf.Max(noisemaker.PlayerVolume, MoveVolume);
         }
+
         if (reverseMovement == true)
         {
             if (Mathf.Abs(speed) < Mathf.Abs(maxSpeed))

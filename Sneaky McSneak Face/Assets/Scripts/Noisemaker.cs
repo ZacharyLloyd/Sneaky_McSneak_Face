@@ -5,7 +5,7 @@ using UnityEngine;
 public class Noisemaker : MonoBehaviour
 {
     public float PlayerVolume = 0;
-    public float SlowDownVolume = 0.013f;
+    public float SlowDownVolume = 0.016f;
 
     // Update is called once per frame
     void Update()

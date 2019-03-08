@@ -6,6 +6,11 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    //Singleton
+    public static GameManager instance;
+
+    public PlayerMovement player;
+
     public Image healthUI;
     public float currentHealth;
     public float maxHealth;
@@ -14,11 +19,7 @@ public class GameManager : MonoBehaviour
     public static float ammo;
     public float maxAmmo;
     public TextMeshProUGUI ammoUI;
-
-    //Singleton
-    public static GameManager instance;
-
-    public PlayerMovement player;
+    
 
     //Awake runs before all Starts
     private void Awake()
