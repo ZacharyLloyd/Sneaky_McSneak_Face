@@ -18,6 +18,7 @@ public class EnemyControllers : Controller
         {
             case Pawn.AIStates.Idle:
                 pawn.Idle();
+                Debug.Log(GameManager.instance.player.tf.position);
                 //Check for transitions
                 if (pawn.senses.CanHear(GameManager.instance.player.gameObject))
                 {

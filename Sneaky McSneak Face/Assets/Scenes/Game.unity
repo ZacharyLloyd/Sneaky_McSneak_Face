@@ -15522,10 +15522,11 @@ GameObject:
   - component: {fileID: 532347934}
   - component: {fileID: 532347933}
   - component: {fileID: 532347935}
-  - component: {fileID: 532347932}
   - component: {fileID: 532347931}
   - component: {fileID: 532347936}
   - component: {fileID: 532347937}
+  - component: {fileID: 532347938}
+  - component: {fileID: 532347932}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -15563,20 +15564,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 532347930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac4ef615a4c55584fb0b3661ad9e4335, type: 3}
+  m_Script: {fileID: 11500000, guid: 30ff21c3362a7e14587eb9569c123c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
   rotationSpeed: 0
-  maxSpeed: 1
+  maxSpeed: 5
   maxRotationSpeed: 5
   rateOfSpeed: 1
   rateOfRotation: 3
-  enableReversedControl: 0
+  enableReversedControl: 1
+  clockwise: 0
+  movement: 0
+  reverseMovement: 0
+  rigidBody: {fileID: 532347931}
   tf: {fileID: 0}
-  noisemaker: {fileID: 0}
-  MoveVolume: 5
-  TurnVolume: 5
+  noisemaker: {fileID: 532347937}
+  MoveVolume: 0
+  TurnVolume: 0.02
+  senses: {fileID: 0}
+  homePoint: {x: 0, y: 0, z: 0}
+  goalPoint: {x: 0, y: 0, z: 0}
+  currentState: 0
+  stopChaseDistance: 0
+  closeEnough: 0
+  moveSpeed: 1
+  turnSpeed: 1
 --- !u!212 &532347933
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15687,6 +15700,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerVolume: 0
   SlowDownVolume: 0.02
+--- !u!114 &532347938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532347930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7548a5287e3744a9dbbf35c4c58fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawn: {fileID: 532347932}
 --- !u!1 &805201106
 GameObject:
   m_ObjectHideFlags: 0
@@ -23349,7 +23375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0ebc0f45322d549b9e785a5562ac3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 532347932}
+  player: {fileID: 0}
   healthUI: {fileID: 1280177041}
   currentHealth: 0
   maxHealth: 100

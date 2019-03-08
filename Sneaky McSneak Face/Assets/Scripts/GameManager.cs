@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     //Singleton
     public static GameManager instance;
 
-    public PlayerMovement player;
+    public PlayerPawn player;
 
     public Image healthUI;
     public float currentHealth;
