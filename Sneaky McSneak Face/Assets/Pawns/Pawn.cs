@@ -4,16 +4,78 @@ using UnityEngine;
 
 public class Pawn : MonoBehaviour
 {
+    //Player Components
+    //Initializing speed and the speed of rotation
+    [HideInInspector] public float speed; //Current speed 
+    [HideInInspector] public float rotationSpeed; //Current rotation speed
+    public float maxSpeed; //The max speed
+    public float maxRotationSpeed; //Max speed for rotation
+    public float rateOfSpeed; //The amount of speed gained over time
+    public float rateOfRotation; //The amount of rotation speed gained over time
+
+    public bool enableReversedControl = true; //Reservsing the controls
+
+    public float clockwise; //Reads the values 1 and -1, 1 for clockwise and -1 for counter clockwise
+    public static float rotationValue; //Rotation controls, returns the value of the controller/keyboard (-1, 0, 1)
+
+    public bool movement; //Detecting movement
+    public bool reverseMovement; //Detecting reverse movement
+
+    public Rigidbody2D rigidBody; //Giving a name that will reference the rigid body on the sprite
+    public static Vector3 originPosition;
+
+    public Transform tf; //Declaring the transform
+    public Noisemaker noisemaker; //Creating the noisemaker for the player
+    public float MoveVolume; //Moving volume
+    public float TurnVolume; // Turning volume
+
+
+    //AI Component
+    public AISenses senses;
+
+    //FSM
+    public enum AIStates
+    {
+        Idle,
+        Chase,
+        LookAround,
+        GoHome
+    }
+    public Vector3 homePoint;
+    public Vector3 goalPoint;
+    public AIStates currentState;
+    public float stopChaseDistance;
+    public float closeEnough;
+
+    public float moveSpeed = 1;
+    public float turnSpeed = 1;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
-        
+        // Store my senses component
+        senses = GetComponent<AISenses>();
+
+        tf = GetComponent<Transform>();
+
+        // Save home point
+        homePoint = tf.position;
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
         
+    }
+
+    public virtual void FixedUpdate()
+    {
+        rotationValue = Input.GetAxisRaw("Horizontal"); //Left or right arrow keys or A and D keys
+
+        Rotate(-rotationValue); //rotationValue is used as a parameter for the rotate function
+
+        if (Input.GetKey(KeyCode.W)) Forward();
+
     }
 
     //This is the player's functions
