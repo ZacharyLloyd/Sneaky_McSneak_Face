@@ -47,8 +47,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         tf = gameObject.transform;
-        
-         
     }
 
     private void FixedUpdate()

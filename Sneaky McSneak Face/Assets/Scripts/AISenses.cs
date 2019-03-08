@@ -52,6 +52,7 @@ public class AISenses : MonoBehaviour
         {
             return false;
         }
+        
         //If they are outside the view angle, cannot be seen
         //To check, need the vector to the target, and compare that angle to the foward vector
         Transform targetTransform = target.GetComponent<Transform>();
@@ -63,12 +64,12 @@ public class AISenses : MonoBehaviour
         {
             return false;
         }
-        // If they are in our field-of-view
+        // If the player is in field-of-view
         //Use raycast to make sure nothing is blocking the view
         
-        RaycastHit2D hitInfo = Physics2D.Raycast(tf.position, vectorToTarget, sightDistance);
+        RaycastHit2D hitInfo = Physics2D.Raycast(tf.position, tf.position + vectorToTarget, sightDistance);
+        Debug.Log("SUKCKCKKCKCKC " + hitInfo.collider);
 
-        
         Debug.DrawLine(tf.position, tf.position + vectorToTarget * sightDistance, Color.red);
 
         //If the raycase hits nothing, enemy cannot see player
@@ -76,14 +77,15 @@ public class AISenses : MonoBehaviour
         {
           return false;
         }
-        Debug.Log("Raycast? " + hitInfo.collider);
+        
         //If the raycast hits the player first, enemy can see them
-        if (hitInfo.collider == targetCollider)
-       {
+        if (hitInfo.collider.name == "enemyShooter")
+        {
            
             Debug.DrawLine(tf.position, tf.position + vectorToTarget * sightDistance, Color.red);
             return true;
         }
+        Debug.Log("Raycast? " + hitInfo.collider);
         //Otherwise, if enemy raycast hitss somehting else we failed to see the player
         return false;
     }

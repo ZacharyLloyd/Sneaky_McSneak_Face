@@ -40,6 +40,8 @@ public class Guard : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
+
+        tf = gameObject.transform;
         //AI states are based on enum values
         switch (currentState)
         {
