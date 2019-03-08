@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public bool enableReversedControl = true; //Reservsing the controls
 
     private float clockwise; //Reads the values 1 and -1, 1 for clockwise and -1 for counter clockwise
-    private float rotationValue; //Rotation controls, returns the value of the controller/keyboard (-1, 0, 1)
+    public static float rotationValue; //Rotation controls, returns the value of the controller/keyboard (-1, 0, 1)
 
     private bool movement; //Detecting movement
     private bool reverseMovement; //Detecting reverse movement

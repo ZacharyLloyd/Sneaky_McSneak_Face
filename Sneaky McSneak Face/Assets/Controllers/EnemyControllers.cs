@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControllers : MonoBehaviour
+public class EnemyControllers : Controller
 {
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
         
     }

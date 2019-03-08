@@ -30,6 +30,7 @@ public class Pawn : MonoBehaviour
         return direction;
     }
 
+
     //This is the enemy's functions
     public virtual void Idle()
     {
