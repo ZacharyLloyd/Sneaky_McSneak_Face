@@ -73,6 +73,18 @@ public class EnemyControllers : Controller
                     pawn.currentState = Pawn.AIStates.Idle;
                 }
                 break;
+            case Pawn.AIStates.Shoot:
+                pawn.Shoot();
+                //Check for transitions
+                if (Vector3.Distance(pawn.tf.position, pawn.homePoint) <= pawn.closeEnough)
+                {
+                    pawn.currentState = Pawn.AIStates.Chase;
+                }
+                if (!pawn.senses.CanSee(GameManager.instance.player.gameObject))
+                {
+                    pawn.currentState = Pawn.AIStates.LookAround;
+                }
+                break;
         }
     }
 }

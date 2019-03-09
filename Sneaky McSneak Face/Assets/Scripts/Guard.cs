@@ -6,14 +6,15 @@ public class Guard : MonoBehaviour
 {
     //Component
     private AISenses senses;
-
+   
     //FSM
     public enum AIStates
     {
         Idle,
         Chase,
         LookAround,
-        GoHome
+        GoHome,
+        Shoot
     }
     public Vector3 homePoint;
     public Vector3 goalPoint;
@@ -68,13 +69,18 @@ public class Guard : MonoBehaviour
                 {
                     currentState = AIStates.GoHome;
                 }
+                if (Vector3.Distance(tf.position, GameManager.instance.player.tf.position) <= stopChaseDistance)
+                {
+                    currentState = AIStates.Shoot;
+                }
                 break;
             case AIStates.LookAround:
                 LookAround();
                 //Check for transitions
                 if (senses.CanSee(GameManager.instance.player.gameObject))
                 {
-                    currentState = AIStates.Chase;
+                    currentState = AIStates.Shoot;
+                    
                 }
                 else if (Vector3.Distance(tf.position, GameManager.instance.player.tf.position) > stopChaseDistance)
                 {
@@ -101,6 +107,8 @@ public class Guard : MonoBehaviour
                     currentState = AIStates.Idle;
                 }
                 break;
+
+
         }
     }
 
@@ -157,4 +165,5 @@ public class Guard : MonoBehaviour
             tf.Rotate(0, 0, -turnSpeed * Time.deltaTime);
         }
     }
+    
 }

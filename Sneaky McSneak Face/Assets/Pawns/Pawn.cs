@@ -39,7 +39,8 @@ public class Pawn : MonoBehaviour
         Idle,
         Chase,
         LookAround,
-        GoHome
+        GoHome,
+        Shoot
     }
     public Vector3 homePoint;
     public Vector3 goalPoint;
@@ -50,6 +51,11 @@ public class Pawn : MonoBehaviour
     public float moveSpeed = 1;
     public float turnSpeed = 1;
 
+    public GameObject bulletPrefab;
+    public IEnumerator coroutine;
+    public bool canShoot;
+    public Transform pointOfFire;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -57,6 +63,9 @@ public class Pawn : MonoBehaviour
         senses = GetComponent<AISenses>();
 
         tf = GetComponent<Transform>();
+
+        // Load noisemaker
+        noisemaker = GetComponent<Noisemaker>();
 
         // Save home point
         homePoint = tf.position;
@@ -122,4 +131,14 @@ public class Pawn : MonoBehaviour
     {
 
     }
+    public virtual void Shoot()
+    {
+
+    }
+    IEnumerator Recoil()
+    {
+        yield return new WaitForSeconds(1f);
+        canShoot = true;
+    }
+
 }

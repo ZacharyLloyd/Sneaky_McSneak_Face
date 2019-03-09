@@ -69,4 +69,21 @@ public class EnemyPawn : Pawn
             tf.Rotate(0, 0, -turnSpeed * Time.deltaTime);
         }
     }
+
+    public override void Shoot()
+    {
+        if (canShoot == true)
+        {
+            coroutine = Recoil();
+            Instantiate(bulletPrefab, pointOfFire);
+            canShoot = false;
+            StartCoroutine(coroutine);
+        }
+
+    }
+    IEnumerator Recoil()
+    {
+        yield return new WaitForSeconds(1f);
+        canShoot = true;
+    }
 }
