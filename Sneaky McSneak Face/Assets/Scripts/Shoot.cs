@@ -15,8 +15,13 @@ public class Shoot : MonoBehaviour
         private bool isKeyReleased;
         private IEnumerator coroutine;
 
-        //called once per frame
-        void Update()
+    //called at start
+    private void Start()
+    {
+        bulletPrefab.tag = "Bullet";
+    }
+    //called once per frame
+    void Update()
         {
             //When player shoots
             if (Input.GetKeyDown(KeyCode.Space) || isKeyReleased == true)

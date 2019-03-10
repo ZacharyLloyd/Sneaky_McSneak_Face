@@ -8,6 +8,8 @@ public class EnemyPawn : Pawn
     public override void Start()
     {
         base.Start();
+        canShoot = true;
+        
     }
 
     // Update is called once per frame
@@ -72,11 +74,16 @@ public class EnemyPawn : Pawn
 
     public override void Shoot()
     {
+        //Look at target
+        Vector3 vectorToTarget = GameManager.instance.player.tf.position - tf.position;
+        tf.right = vectorToTarget;
+
         if (canShoot == true)
         {
-            coroutine = Recoil();
-            Instantiate(bulletPrefab, pointOfFire);
             canShoot = false;
+            coroutine = Recoil();
+            Instantiate(enemyBulletPrefab, pointOfFire);
+            enemyBulletPrefab.tag = "enemyBullet";
             StartCoroutine(coroutine);
         }
 
@@ -85,5 +92,14 @@ public class EnemyPawn : Pawn
     {
         yield return new WaitForSeconds(1f);
         canShoot = true;
+    }
+    //Destroying enemy
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            ++GameManager.instance.enemiesKilled;
+            Destroy(gameObject);
+        }
     }
 }

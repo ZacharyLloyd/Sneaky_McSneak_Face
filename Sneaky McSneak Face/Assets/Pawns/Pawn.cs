@@ -52,8 +52,9 @@ public class Pawn : MonoBehaviour
     public float turnSpeed = 1;
 
     public GameObject bulletPrefab;
+    public GameObject enemyBulletPrefab;
     public IEnumerator coroutine;
-    public bool canShoot;
+    public bool canShoot = true;
     public Transform pointOfFire;
 
     // Start is called before the first frame update

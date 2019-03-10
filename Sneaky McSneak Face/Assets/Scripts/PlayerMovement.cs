@@ -138,11 +138,11 @@ public class PlayerMovement : MonoBehaviour
                 gameManager.instance.playerLives--;
                 gameObject.transform.position = originPosition;
                 gameManager.instance.RemoveEnemies();
-                Debug.Log("You now have " + gameManager.instance.playerLives + " lives.");
+                
             }
             else
             {
-                Debug.LogWarning("Player ship was destroyed");
+               
                 Destroy(gameObject);
             }
             gameObject.transform.position = originPosition;

@@ -30,7 +30,7 @@ public class AISenses : MonoBehaviour
         }
         //If they do have a noisemaker, check distance -- if it is <= (PlayerVolume * hearingScale), then we can hear them
         Transform targetTf = target.GetComponent<Transform>();
-        if (Vector3.Distance(targetTf.position, tf.position) <= targetNoiseMaker.PlayerVolume * hearingScale)
+        if (Vector3.Distance(tf.position, targetTf.position) <= targetNoiseMaker.PlayerVolume * hearingScale)
         {
             return true;
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerPawn : Pawn
 {
@@ -8,6 +9,7 @@ public class PlayerPawn : Pawn
     public override void Start()
     {
         base.Start();
+        bulletPrefab.tag = "Bullet";
     }
 
     // Update is called once per frame
@@ -82,6 +84,14 @@ public class PlayerPawn : Pawn
         {
             if (Mathf.Abs(speed) > 0)
                 speed -= rateOfSpeed * Mathf.Sign(-speed);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "enemyBullet")
+        {
+            GameManager.instance.DecreaseHealth(25f);
+            //SceneManager.LoadScene(3);
         }
     }
 }

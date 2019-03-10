@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletProjection : MonoBehaviour
 {
     public float bulletVelocity; //How fast the bullet will go
-    public Rigidbody2D rigidBody; //This in able to apply physics to laser
+    public Rigidbody2D rigidBody; //This in able to apply physics to bullet
     //before first frame
     void Awake()
     {
